@@ -76,9 +76,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
         if (isNewUser) {
           await sendEmail({
-            from: 'Acme <welcome@resend.dev>',
+            from: 'MyAPP <welcome@resend.dev>',
             to: user.email!,
-            subject: 'Bem-vindo(a) à nossa plataforma!',
+            subject: 'Welcome!',
             react: WelcomeEmail({ name: user.name! }),
           })
         }

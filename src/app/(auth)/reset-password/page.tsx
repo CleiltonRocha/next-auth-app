@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
 import { EyeIcon, EyeOffIcon, Loader2 } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -11,7 +10,6 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import Logo from '@/assets/icon-logo.svg'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -73,18 +71,18 @@ export default function ResetPassword() {
 
       router.push('/login')
 
-      toast.success('Senha alterada com sucesso!', {
+      toast.success('Password changed successfully!', {
         description:
-          'Sua senha foi alterada. Agora você pode fazer login com a nova senha.',
+          'Your password has been changed. Now you can log in with the new password.',
       })
     } catch (error) {
       if (error instanceof AxiosError && error?.response?.data?.error) {
         const errorMessage =
           typeof error.response.data.error === 'string'
             ? error.response.data.error
-            : 'Ops! por algum motivo não consegui alterar a seua senha 🫤'
+            : 'Oops! for some reason I could not change your password 🫤'
 
-        toast.error('Erro ao tentar alterar a senha!', {
+        toast.error('Error trying to change password!', {
           description: errorMessage,
         })
       }
@@ -94,12 +92,13 @@ export default function ResetPassword() {
   return (
     <>
       <div className="flex flex-col items-start">
-        <Image src={Logo} alt="Logo" className="mb-3 h-12 w-12" />
+        <h2 className="mb-3 text-2xl font-semibold text-primary">MyAPP</h2>
+
         <h3 className="text-3xl font-medium tracking-tight text-gray-900 dark:text-gray-50">
-          Redefinição de senha
+          Password Reset
         </h3>
         <p className="text-md mt-2 text-gray-600 dark:text-gray-400">
-          Agora é só digitar uma nova senha para fazer a alteração.
+          Now just enter a new password to make the change.
         </p>
       </div>
       <form onSubmit={handleSubmit(handleResetPassword)}>
@@ -108,12 +107,12 @@ export default function ResetPassword() {
 
         <div className="mt-4 flex flex-col gap-2">
           <Label className="text-muted-foreground" htmlFor="password">
-            Nova senha
+            New password
           </Label>
           <div className="relative">
             <Input
               id="password"
-              placeholder="Digite uma nova senha"
+              placeholder="Type a new password"
               type={showPassword ? 'text' : 'password'}
               {...register('newPassword')}
               className={`${errors?.newPassword ? 'ring ring-red-400' : ''}`}
@@ -144,12 +143,12 @@ export default function ResetPassword() {
         </div>
         <div className="mt-4 flex flex-col gap-2">
           <Label className="text-muted-foreground" htmlFor="confirm_password">
-            Confirme sua senha
+            Confirm your password
           </Label>
           <div className="relative">
             <Input
               id="confirm_password"
-              placeholder="Confirme sua senha"
+              placeholder="Confirm your new password"
               type={showConfirmPassword ? 'text' : 'password'}
               {...register('confirmPassword')}
               className={`${errors?.confirmPassword ? 'ring ring-red-400' : ''}`}
@@ -185,11 +184,11 @@ export default function ResetPassword() {
           disabled={isSubmitting}
         >
           {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {isSubmitting ? 'Alterando...' : 'Alterar Senha'}
+          {isSubmitting ? 'Changing...' : 'Change Password'}
         </Button>
         <Link href="/login">
           <Button className="mt-4 w-full" variant="secondary">
-            Voltar
+            Back
           </Button>
         </Link>
       </form>

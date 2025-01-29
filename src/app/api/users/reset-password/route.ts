@@ -10,7 +10,9 @@ import PasswordChangedEmail from '../../../../../emails/password-changed-email'
 const resetPasswordSchema = z.object({
   token: z.string(),
   email: z.string().email(),
-  newPassword: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
+  newPassword: z
+    .string()
+    .min(6, 'The password must be at least 6 characters long'),
 })
 
 export async function PUT(req: NextRequest) {
@@ -23,7 +25,7 @@ export async function PUT(req: NextRequest) {
     if (!user) {
       return NextResponse.json(
         {
-          error: 'Ops! Não encontramos nenhum usuário com esse e-mail.',
+          error: 'Oops! We could not find any user with this email.',
         },
         { status: 404 },
       )
@@ -37,7 +39,7 @@ export async function PUT(req: NextRequest) {
     ) {
       return NextResponse.json(
         {
-          error: 'Token inválido ou expirado.',
+          error: 'Invalid or expired token.',
         },
         { status: 400 },
       )
@@ -55,20 +57,20 @@ export async function PUT(req: NextRequest) {
     })
 
     await sendEmail({
-      from: 'Examify <onboarding@resend.dev>',
+      from: 'MyAPP <onboarding@resend.dev>',
       to: email,
-      subject: '[Examify] Aviso de Redefinição de senha',
+      subject: '[MyAPP] Password Reset Notification',
       react: PasswordChangedEmail({ name: user.name! }),
     })
 
     return NextResponse.json(
-      { message: 'Senha alterada com sucesso!' },
+      { message: 'Password changed successfully!' },
       { status: 200 },
     )
     // eslint-disable-next-line
   } catch (error: any) {
     return NextResponse.json(
-      { error: 'Falha ao alterar a senha: ' + error.message },
+      { error: 'Failed to change password: ' + error.message },
       { status: 500 },
     )
   }

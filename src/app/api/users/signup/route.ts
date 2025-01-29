@@ -33,9 +33,9 @@ export async function POST(req: NextRequest) {
     })
 
     await sendEmail({
-      from: 'Acme <welcome@resend.dev>',
+      from: 'MyAPP <welcome@resend.dev>',
       to: email,
-      subject: 'Bem-vindo(a) ao Examify!',
+      subject: 'Welcome to MyAPP!',
       react: WelcomeEmail({ name }),
     })
 
@@ -44,12 +44,12 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     if (error?.code === 'P2002' && error.meta?.target?.includes('email')) {
       return NextResponse.json(
-        { error: 'Este e-mail já está sendo usado.' },
+        { error: 'This email is already in use.' },
         { status: 409 },
       )
     } else {
       return NextResponse.json(
-        { error: 'Falha na criação do usuário' },
+        { error: 'Failed to create user' },
         { status: 500 },
       )
     }

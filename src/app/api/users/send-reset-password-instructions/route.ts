@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           error:
-            'Ops! Não encontramos nenhum usuário com esse e-mail. Verifique se digitou certo.',
+            'Oops! We could not find any user with this email. Please check if you typed it correctly.',
         },
         { status: 404 },
       )
@@ -49,9 +49,9 @@ export async function POST(req: NextRequest) {
     const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${resetToken}&email=${email}`
 
     await sendEmail({
-      from: 'Examify <onboarding@resend.dev>',
+      from: 'MyAPP <onboarding@resend.dev>',
       to: email,
-      subject: '[Examify] Recuperação de senha',
+      subject: '[MyAPP] Password Recovery',
       react: PasswordResetInstructions({ name: user.name!, resetUrl }),
     })
 

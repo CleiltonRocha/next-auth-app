@@ -36,33 +36,20 @@ export const PasswordResetInstructions = ({
         <Body className="mx-auto my-auto bg-white font-sans">
           <Container className="mx-auto my-[40px] max-w-[465px] rounded-md border border-solid border-[#eaeaea]">
             <Section className="flex flex-col items-start bg-blue-50/40 p-6">
-              <Img
-                alt="Examify horizontal logo"
-                src={`${baseUrl}/static/horizontal-dark-logo.svg `}
-                width={150}
-              />
+              <Img alt="" src={`${baseUrl}/static/logo.png`} width={150} />
               <Section className="mt-6 flex flex-col items-start space-y-1">
-                <Text className="mb-0 text-3xl font-medium tracking-tight text-gray-900">
-                  Ops! Quer dizer que você
-                </Text>
                 <Text className="mt-0 text-4xl font-medium tracking-tight text-blue-500">
-                  esqueceu a senha?🫤
+                  Forgot your Password?🫤
                 </Text>
               </Section>
             </Section>
             <Section className="flex items-start px-6 pb-6">
-              <Img
-                alt="Examify horizontal logo"
-                src={`${baseUrl}/static/lock-icon.svg `}
-                width={32}
-                className="mt-8"
-              />
               <Heading className="mx-0 p-0 text-2xl font-medium tracking-tight text-gray-900">
-                Opaa {name},
+                Hello {name},
               </Heading>
               <Text className="text-base leading-[24px] text-gray-500">
-                Vimos que você pediu pra trocar a senha. Dá um clique no link
-                abaixo pra seguir com a mudança.
+                We noticed that you requested a password change. Click the link
+                below to proceed with the update.
               </Text>
               <Section className="mb-[32px] mt-[24px] text-left">
                 <Button
@@ -73,7 +60,7 @@ export const PasswordResetInstructions = ({
                 </Button>
               </Section>
               <Text className="text-base leading-[24px] text-gray-500">
-                Ou copie e cole esta URL no seu navegador: <br />
+                Or copy and paste this URL in your browser: <br />
                 <Link href={resetUrl} className="text-blue-600 no-underline">
                   {resetUrl}
                 </Link>

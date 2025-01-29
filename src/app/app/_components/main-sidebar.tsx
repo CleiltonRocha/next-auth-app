@@ -1,8 +1,6 @@
 import { Home, LineChart, Package, ShoppingCart, Users } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 
-import Logo from '@/assets/icon-logo.svg'
 import { Badge } from '@/components/ui/badge'
 
 export function MainSidebar() {
@@ -11,8 +9,9 @@ export function MainSidebar() {
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b border-border px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Image src={Logo} className="h-10 w-10" alt="" />
-            <h4 className="text-muted-foreground">examify.ai</h4>
+            <h2 className="mb-3 text-2xl font-semibold text-primary">MyAPP</h2>
+
+            <h4 className="text-muted-foreground">myapp</h4>
           </Link>
         </div>
         <div className="flex-1">

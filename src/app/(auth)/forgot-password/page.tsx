@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
 import { ArrowLeft, Loader2, Mail } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
@@ -11,7 +10,6 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import Logo from '@/assets/icon-logo.svg'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -42,7 +40,6 @@ export default function ForgotPassword() {
 
   async function handleForgotPassword(data: ForgotPasswordSchema) {
     try {
-      console.log('EMAIL', email)
       const response = await api.post(
         '/users/send-reset-password-instructions',
         data,
@@ -55,17 +52,17 @@ export default function ForgotPassword() {
 
       console.log(response)
 
-      toast.success('Email enviado com sucesso!', {
-        description: 'Corre lá no seu e-mail pra você criar uma nova senha.',
+      toast.success('Email sent successfully!', {
+        description: 'Go to your email to create a new password.',
       })
     } catch (error) {
       if (error instanceof AxiosError && error?.response?.data?.error) {
         const errorMessage =
           typeof error.response.data.error === 'string'
             ? error.response.data.error
-            : 'Ops! por algum motivo seu e-mail não foi enviado. Verifique se digitou corretamente.'
+            : 'Oops! for some reason your email was not sent. Check if you typed it correctly.'
 
-        toast.error('Erro ao enviar o e-mail!', {
+        toast.error('Error sending the email!', {
           description: errorMessage,
         })
       }
@@ -75,14 +72,13 @@ export default function ForgotPassword() {
   return (
     <>
       <div className="flex flex-col items-start">
-        <Image src={Logo} alt="Logo" className="mb-3 h-12 w-12" />
-
+        <h2 className="mb-3 text-2xl font-semibold text-primary">MyAPP</h2>
         <h3 className="text-3xl font-medium tracking-tight text-gray-900 dark:text-gray-50">
-          Recuperação de senha
+          Password recovery
         </h3>
         <p className="text-md mt-2 text-gray-600 dark:text-gray-400">
-          Digite o seu e-mail que a gente manda as instruções pra você criar uma
-          nova senha, beleza?
+          Enter your email and we will send you the instructions to create a new
+          password.
         </p>
       </div>
       <form onSubmit={handleSubmit(handleForgotPassword)}>
@@ -111,7 +107,7 @@ export default function ForgotPassword() {
           ) : (
             <Mail className="h-4 w-4" />
           )}
-          {isSubmitting ? 'Enviando...' : 'Enviar E-mail'}
+          {isSubmitting ? 'Sending...' : 'Send email'}
         </Button>
 
         <Link href="/login" className="text-primary">
@@ -121,7 +117,7 @@ export default function ForgotPassword() {
             type="button"
           >
             <ArrowLeft className="h-4 w-4" />
-            Voltar
+            Back
           </Button>
         </Link>
       </form>

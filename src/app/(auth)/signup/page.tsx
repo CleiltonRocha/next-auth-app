@@ -13,7 +13,6 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 
 import GoogleLogo from '@/assets/google-logo.svg'
-import Logo from '@/assets/icon-logo.svg'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -48,15 +47,15 @@ export default function SignUp() {
       })
 
       if (response.status === 201) {
-        toast.success('Conta criada com sucesso!', {
-          description: 'Faça login para acessar o examify',
+        toast.success('Account created successfully!', {
+          description: 'Sign in to access MyAPP',
         })
         router.push('/login')
       }
     } catch (error) {
       if (error instanceof AxiosError && error?.response?.data?.error) {
-        toast.error('Erro ao criar conta', {
-          description: error.response.data.error || 'Erro desconhecido',
+        toast.error('Error creating account', {
+          description: error.response.data.error || 'Unknown error',
         })
       }
     }
@@ -65,15 +64,15 @@ export default function SignUp() {
   return (
     <>
       <div className="flex flex-col items-start">
-        <Image src={Logo} alt="Logo" className="mb-3 h-12 w-12" />
+        <h2 className="mb-3 text-2xl font-semibold text-primary">MyAPP</h2>
 
         <h3 className="text-3xl font-medium tracking-tight text-gray-900 dark:text-gray-50">
-          Crie uma conta Examify
+          Create a MyAPP account
         </h3>
         <p className="text-md mt-2 text-gray-600 dark:text-gray-400">
-          Já possui uma conta?{' '}
+          Already have an account?{' '}
           <Link href="/login" className="text-primary">
-            Fazer login
+            Log in
           </Link>
         </p>
       </div>
@@ -83,7 +82,7 @@ export default function SignUp() {
         onClick={() => signIn('google', { redirect: true })}
       >
         <Image src={GoogleLogo} alt="Google Logo" className="h-4 w-4" />
-        Cadastre-se com Google
+        Sign up with Google
       </Button>
       <div className="mb-6 mt-6 flex items-center justify-center">
         <div
@@ -92,7 +91,7 @@ export default function SignUp() {
           data-orientation="horizontal"
           role="separator"
         ></div>
-        <span className="text-slate-11 mx-4 text-xs font-normal">OU</span>
+        <span className="text-slate-11 mx-4 text-xs font-normal">OR</span>
         <div
           aria-hidden="true"
           className="h-px w-full bg-muted"
@@ -103,11 +102,11 @@ export default function SignUp() {
       <form onSubmit={handleSubmit(handleSignUp)}>
         <div className="mt-4 flex flex-col gap-2">
           <Label className="text-muted-foreground" htmlFor="name">
-            Seu nome
+            Your name
           </Label>
           <Input
             id="name"
-            placeholder="Digite seu nome"
+            placeholder="Enter your name"
             type="text"
             {...register('name')}
             className={`${errors?.name ? 'ring ring-red-400' : ''}`}
@@ -122,7 +121,7 @@ export default function SignUp() {
           </Label>
           <Input
             id="email"
-            placeholder="Digite seu e-mail"
+            placeholder="Enter your e-mail"
             {...register('email')}
             className={`${errors?.email ? 'ring ring-red-400' : ''}`}
           />
@@ -132,12 +131,12 @@ export default function SignUp() {
         </div>
         <div className="mt-4 flex flex-col gap-2">
           <Label className="text-muted-foreground" htmlFor="password">
-            Senha
+            Password
           </Label>
           <div className="relative">
             <Input
               id="password"
-              placeholder="Sua senha"
+              placeholder="Enter your password"
               type={showPassword ? 'text' : 'password'}
               {...register('password')}
               className={`${errors?.password ? 'ring ring-red-400' : ''}`}
@@ -169,7 +168,7 @@ export default function SignUp() {
 
         <Button className="mt-4 w-full" type="submit" disabled={isSubmitting}>
           {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {isSubmitting ? 'Criando...' : 'Criar uma conta'}
+          {isSubmitting ? 'Creating...' : 'Create an account'}
         </Button>
       </form>
     </>
